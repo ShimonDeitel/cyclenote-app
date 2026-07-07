@@ -1,0 +1,75 @@
+name: CycleNote
+options:
+  bundleIdPrefix: com.shimondeitel.cyclenote
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  CycleNote:
+    type: application
+    platform: iOS
+    sources:
+      - path: CycleNote
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.cyclenote
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: CycleNote/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  CycleNoteTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: CycleNoteTests
+      - path: CycleNote.storekit
+    dependencies:
+      - target: CycleNote
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.cyclenote.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  CycleNoteUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: CycleNoteUITests
+    dependencies:
+      - target: CycleNote
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.cyclenote.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  CycleNote:
+    build:
+      targets:
+        CycleNote: all
+        CycleNoteTests: [test]
+        CycleNoteUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: CycleNote.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: CycleNote.storekit
+      targets:
+        - CycleNoteTests
+        - CycleNoteUITests
+    archive:
+      config: Release
